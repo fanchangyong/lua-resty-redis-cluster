@@ -215,7 +215,7 @@ local function _do_cmd(self, cmd, key, ...)
                 slots[slot].cur = index
                 local res, err = redis_client[cmd](redis_client, key, ...)
                 redis_client:set_keepalive(config.keepalive_timeout or DEFUALT_KEEPALIVE_TIMEOUT,
-                                           config.keepalove_cons or DEFAULT_KEEPALIVE_CONS)
+                                           config.keepalive_cons or DEFAULT_KEEPALIVE_CONS)
                 if err and string.sub(err, 1, 5) == "MOVED" then
                     self:fetch_slots()
                     break
@@ -287,7 +287,7 @@ function _M.commit_pipeline(self)
             end
             local res, err = ins:commit_pipeline()
             ins:set_keepalive(config.keepalive_timeout or DEFUALT_KEEPALIVE_TIMEOUT,
-                                           config.keepalove_cons or DEFAULT_KEEPALIVE_CONS)
+                                           config.keepalive_cons or DEFAULT_KEEPALIVE_CONS)
             if err then
                 return nil, err.." return from "..tostring(ip)..":"..tostring(port)
             end
